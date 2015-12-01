@@ -1,8 +1,14 @@
 <?php
 
-function ping($host){	
-    exec(sprintf('ping -c 1 -W 5 %s', escapeshellarg($host)), $res, $rval);
-    return $rval === 0;
+error_reporting(E_ERROR | E_PARSE);
+
+function ping($host, $port){
+	if($fp = fsockopen($host,$port,$errCode,$errStr, 1)){   
+	   return true;
+	} else {
+	   return false;
+	} 
+	fclose($fp);
 }
 
 ?>
